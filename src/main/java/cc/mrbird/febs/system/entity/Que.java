@@ -39,22 +39,22 @@ public class Que implements Serializable {
      * 选项A
      */
     @TableField("QUE_A")
-    private String que_A;
+    private String queA;
     /**
      * 选项B
      */
     @TableField("QUE_B")
-    private String que_B;
+    private String queB;
     /**
      * 选项C
      */
     @TableField("QUE_C")
-    private String que_C;
+    private String queC;
     /**
      * 选项A
      */
     @TableField("QUE_D")
-    private String que_D;
+    private String queD;
 
 
 

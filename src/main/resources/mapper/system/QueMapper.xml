@@ -94,7 +94,7 @@
 
     <select id="findByName" parameterType="string" resultType="Que">
         SELECT
-        u.que_id uqid,
+        u.que_id queid,
         u.que_title,
         u.que_a,
         u.que_b,

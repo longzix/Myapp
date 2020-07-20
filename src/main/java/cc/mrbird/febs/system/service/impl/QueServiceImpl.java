@@ -40,14 +40,14 @@ public class QueServiceImpl extends ServiceImpl<QueMapper, Que> implements IQueS
         Page<Que> page = new Page<>(request.getPageNum(), request.getPageSize());
         page.setSearchCount(false);
         page.setTotal(baseMapper.countQueDetail(que));
-        SortUtil.handlePageSort(request, page, "userId", FebsConstant.ORDER_ASC, false);
+        SortUtil.handlePageSort(request, page, "queId", FebsConstant.ORDER_ASC, false);
         return this.baseMapper.findQueDetailPage(page, que);
     }
 
     @Override
     public Que findQueDetailList(String quetitle) {
       Que param = new Que();
-      param.setQueTitle(quetitle);
+      param.setQueTitle( quetitle);
       List<Que> ques = this.baseMapper.findQueDetail(param);
       return  CollectionUtils.isNotEmpty(ques) ? ques.get(0) : null;
     }
@@ -66,7 +66,7 @@ public class QueServiceImpl extends ServiceImpl<QueMapper, Que> implements IQueS
     @Transactional(rollbackFor = Exception.class)
     public void deleteQue(String[] queIds) {
         List<String> list = Arrays.asList(queIds);
-        // 删除用户
+        // 删除试题
         this.removeByIds(list);
 
     }

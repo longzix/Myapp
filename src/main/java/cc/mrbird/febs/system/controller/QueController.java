@@ -4,12 +4,16 @@ import cc.mrbird.febs.common.annotation.ControllerEndpoint;
 import cc.mrbird.febs.common.controller.BaseController;
 import cc.mrbird.febs.common.entity.FebsResponse;
 import cc.mrbird.febs.common.entity.QueryRequest;
+import cc.mrbird.febs.common.utils.Md5Util;
 import cc.mrbird.febs.system.entity.Que;
+import cc.mrbird.febs.system.entity.User;
 import cc.mrbird.febs.system.service.IQueService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +33,42 @@ public class QueController extends BaseController {
 
     private final IQueService queService;
 
+
+
+    /*@ResponseBody
+    @PostMapping("/mque")
+    public String mque(@RequestBody String queJson) throws JSONException {
+        System.out.println(loginJson);
+        //System.out.println("666");
+        try {
+           // JSONObject mJsonObject = new JSONObject(loginJson);
+            //String userName = mJsonObject.optString("user_name");
+           // String userPassword = mJsonObject.optString("user_password");
+           // userPassword = Md5Util.encrypt(userName.toLowerCase(), userPassword);
+           // System.out.println("用户名：" + userName + "密码:" + userPassword);
+           // User mUser = userService.findByName(userName);
+            Que que = queService.findQueDetailList(queJson)
+            if(que!=null){
+                //输入的用户名正确
+
+                    return "{\"type\":\"user_login\",\"data\":\"true\",\"error\":\"\"}";
+
+
+            }
+            else{
+                //用户名错误
+                return  "{\"type\":\"user_login\",\"data\":\"false\",\"error\":\"用户名错误\"}";
+            }
+
+        } catch (Exception e) {
+            System.out.println("login err");
+            return "{\"type\":\"user_login\",\"data\":\"false\"}";
+        }
+
+
+    }*/
+
+
     @GetMapping("{username}")
     public Que getUser(@NotBlank(message = "{required}") @PathVariable String username) {
             return this.queService.findQueDetailList(username);
@@ -41,7 +81,7 @@ public class QueController extends BaseController {
 
     @GetMapping("list")
     @RequiresPermissions("que:view")
-    public FebsResponse userList(Que que, QueryRequest request) {
+    public FebsResponse queList(Que que, QueryRequest request) {
         Map<String, Object> dataTable = getDataTable(this.queService.findQueDetailList(que, request));
         return new FebsResponse().success().data(dataTable);
     }

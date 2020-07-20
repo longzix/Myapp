@@ -20,7 +20,7 @@ public interface QueMapper extends BaseMapper<Que> {
      * @param quetitle 题干
      * @return 用户
      */
-    Que findByName(String username);
+    Que findByName(String quetitle);
 
     /**
      * 查找用户详细信息
