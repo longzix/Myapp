@@ -6,6 +6,8 @@ import cc.mrbird.febs.system.entity.User;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * @author longzx
  */
@@ -58,5 +60,10 @@ public interface IQueService extends IService<Que> {
      */
         void updateQue(Que que);
 
-
+    /**
+     * 寻找指定number数量的随机试题
+     *
+     * @param int number
+     */
+    List<Que> findNQue(int number);
 }

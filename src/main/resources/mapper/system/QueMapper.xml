@@ -61,5 +61,12 @@
 
     </select>
 
+    <select id="findNQue" resultType="cc.mrbird.febs.system.entity.Que">
+        SELECT
+        *
+        FROM m_que_table
+        ORDER BY rand()
+        LIMIT #{n}
+    </select>
 
 </mapper>

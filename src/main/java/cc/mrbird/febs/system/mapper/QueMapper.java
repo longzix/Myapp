@@ -40,5 +40,6 @@ public interface QueMapper extends BaseMapper<Que> {
      * @return List<Que>
      */
     List<Que> findQueDetail(@Param("que") Que que);
+    List<Que> findNQue(@Param("number") int n);
 
 }

@@ -1,6 +1,7 @@
 package cc.mrbird.febs.system.mapper;
 
 import cc.mrbird.febs.system.entity.Menu;
+import cc.mrbird.febs.system.entity.Que;
 import com.baomidou.mybatisplus.annotation.SqlParser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -25,4 +26,5 @@ public interface MenuMapper extends BaseMapper<Menu> {
      * @return 用户菜单集合
      */
     List<Menu> findUserMenus(String username);
+
 }

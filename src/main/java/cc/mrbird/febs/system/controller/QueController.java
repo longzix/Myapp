@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,42 +29,47 @@ import java.util.Map;
 @Validated
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("que")
+//@RequestMapping("que")
 public class QueController extends BaseController {
 
     private final IQueService queService;
-
-
+//{"type":"que","data":[]}
+//{"title":""，"que_a":"","que_b":"","que_c":"","que_d":""}
 
     @ResponseBody
     @PostMapping("/mque")
-    public String mque(@RequestBody String queJson) throws JSONException {
-        System.out.println(queJson);
-        //System.out.println("666");
+    public String mlogin(@RequestBody  String loginJson) throws JSONException {
+        List<Que> ques = queService.findNQue(3);
+        System.out.println(loginJson);
+        System.out.println("666");
+        String mj ="{\"type\":\"que\",\"data\":[]}";
         try {
-           // JSONObject mJsonObject = new JSONObject(loginJson);
-            //String userName = mJsonObject.optString("user_name");
-           // String userPassword = mJsonObject.optString("user_password");
-           // userPassword = Md5Util.encrypt(userName.toLowerCase(), userPassword);
-           // System.out.println("用户名：" + userName + "密码:" + userPassword);
-           // User mUser = userService.findByName(userName);
-             JSONObject mJsonObject = new JSONObject (queJson);
-           String quetitle = mJsonObject.optString("quetitle");
-            Que que = queService.findByName(quetitle);
+            Que que = queService.findQueDetailList("dfdgg");
+            Que que1 = queService.findQueDetailList("445ssssss");
+            Que que2 = queService.findQueDetailList("dfdgg");
+           // List<Que> ques = queService.findNQue(3);
+           // Que que3 = ques.get(0);
+           // System.out.println(ques.toString());
+            JSONObject mJsonObject = new JSONObject(mj);
+
+            //mJsonObject.put("data", que1);
+           /* String s2 = "{\"title\":\"\"，\"que_a\":\"\",\"que_b\":\"\",\"que_c\":\"\",\"que_d\":\"\"}";
+            JSONObject mJsonObject2 = new JSONObject(s2);
+            mJsonObject2.put("title", que.getQueTitle());
+            mJsonObject2.put("que_b", que.getQueB());
+            mJsonObject2.put("que_c", que.getQueC());
+            mJsonObject2.put("que_d", que.getQueD());*/
+            mJsonObject.put("data", que.toString());
             if(que!=null){
-                //输入的用户名正确
-
-                    return "yess";
-
-
+                String s =que.getQueTitle();
+                return mJsonObject.toString();
+                //"{\"type\":\"que\",\"data\":}";
             }
-            else{
-                //用户名错误
-                return  "false";
-            }
+            return "yess";
 
         } catch (Exception e) {
-            System.out.println("login err");
+            System.out.println(ques.size());
+            System.out.println();
             return "{\"type\":\"user_login\",\"data\":\"false\"}";
         }
 

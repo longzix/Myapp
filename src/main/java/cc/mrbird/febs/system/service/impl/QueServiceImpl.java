@@ -82,5 +82,8 @@ public class QueServiceImpl extends ServiceImpl<QueMapper, Que> implements IQueS
         return currentUser.getUserId().equals(id);
     }
 
-
+    @Override
+    public List<Que> findNQue(int number) {
+        return this.baseMapper.findNQue(number);
+    }
 }
