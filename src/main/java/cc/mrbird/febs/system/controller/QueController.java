@@ -35,10 +35,10 @@ public class QueController extends BaseController {
 
 
 
-    /*@ResponseBody
+    @ResponseBody
     @PostMapping("/mque")
     public String mque(@RequestBody String queJson) throws JSONException {
-        System.out.println(loginJson);
+        System.out.println(queJson);
         //System.out.println("666");
         try {
            // JSONObject mJsonObject = new JSONObject(loginJson);
@@ -47,17 +47,19 @@ public class QueController extends BaseController {
            // userPassword = Md5Util.encrypt(userName.toLowerCase(), userPassword);
            // System.out.println("用户名：" + userName + "密码:" + userPassword);
            // User mUser = userService.findByName(userName);
-            Que que = queService.findQueDetailList(queJson)
+             JSONObject mJsonObject = new JSONObject (queJson);
+           String quetitle = mJsonObject.optString("quetitle");
+            Que que = queService.findByName(quetitle);
             if(que!=null){
                 //输入的用户名正确
 
-                    return "{\"type\":\"user_login\",\"data\":\"true\",\"error\":\"\"}";
+                    return "yess";
 
 
             }
             else{
                 //用户名错误
-                return  "{\"type\":\"user_login\",\"data\":\"false\",\"error\":\"用户名错误\"}";
+                return  "false";
             }
 
         } catch (Exception e) {
@@ -66,7 +68,7 @@ public class QueController extends BaseController {
         }
 
 
-    }*/
+    }
 
 
     @GetMapping("{username}")
